@@ -1,0 +1,11 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "aws-lamda-spring"
+resolve_s3 = true
+s3_prefix = "aws-lamda-spring"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
+confirm_changeset = true

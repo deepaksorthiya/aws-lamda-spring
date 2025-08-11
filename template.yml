@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Spring Boot 2 API - com.example::aws-lamda-spring
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  AwsLamdaSpringApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      EndpointConfiguration: REGIONAL
+      Name: AwsLamdaSpringApi
+      DefinitionBody:
+        swagger: "2.0"
+        info:
+          title: "AwsLamdaSpringApi"
+          version: "1.0"
+        paths:
+          /{proxy+}:
+            x-amazon-apigateway-any-method:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLamdaSpringFunction.Arn}/invocations
+                httpMethod: POST
+                type: aws_proxy
+
+  AwsLamdaSpringFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.example.StreamLambdaHandler::handleRequest
+      Runtime: java21
+      CodeUri: .
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 30
+      Events:
+        ProxyApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref AwsLamdaSpringApi
+            Path: /{proxy+}
+            Method: ANY
+
+Outputs:
+  ApiUrl:
+    Description: "Invoke URL for API Gateway endpoint"
+    Value: !Sub "http://${AwsLamdaSpringApi}.execute-api.${AWS::Region}.localhost.localstack.cloud/dev/"
+    Export:
+      Name: AwsLamdaSpringApiUrl
