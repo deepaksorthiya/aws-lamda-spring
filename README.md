@@ -45,6 +45,22 @@ $ curl -s http://127.0.0.1:3000/ping | jq
 }
 ``` 
 
+## Debug Locally
+
+```bash
+# Invoke a function locally in debug mode on port 5005
+sam local invoke -d 5005 <function logical id>
+OR
+# Start local API Gateway in debug mode on port 5005
+sam local start-api -d 5005
+```
+
+Fire first request ``http://127.0.0.1:3000/`` to up docker container.
+
+Setup Remote Debug In your IDE and attached port ``5005`` and host ``localhost``
+
+Set Breakpoint and Hit ``http://127.0.0.1:3000/ping``
+
 ## Deploying to AWS
 
 To deploy the application in your AWS account, you can use the SAM CLI's guided deployment process and follow the
