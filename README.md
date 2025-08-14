@@ -61,6 +61,16 @@ Setup Remote Debug In your IDE and attached port ``5005`` and host ``localhost``
 
 Set Breakpoint and Hit ``http://127.0.0.1:3000/ping``
 
+Test Using event 
+
+```bash
+sam local invoke --event events/event.json
+```
+
+```bash
+sam local invoke --event events/event.json -d 5005
+```
+
 ## Deploying to AWS
 
 To deploy the application in your AWS account, you can use the SAM CLI's guided deployment process and follow the
