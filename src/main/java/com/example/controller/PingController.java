@@ -4,7 +4,6 @@ package com.example.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,7 +16,6 @@ import java.util.Map;
 
 
 @RestController
-@EnableWebMvc
 public class PingController {
     @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public Map<String, String> ping() {
@@ -26,7 +24,7 @@ public class PingController {
         return pong;
     }
 
-    @GetMapping(value = {"/", "/server-info"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"/server-info"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> getRequestInfo(@RequestHeader LinkedHashMap<String, String> httpHeaders, HttpServletRequest httpServletRequest) {
         httpHeaders.put("remoteHost", httpServletRequest.getRemoteHost());
         httpHeaders.put("localAddress", httpServletRequest.getLocalAddr());
