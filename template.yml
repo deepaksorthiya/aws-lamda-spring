@@ -23,9 +23,15 @@ Resources:
               x-amazon-apigateway-integration:
                 uri:
                   Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLamdaSpringFunction.Arn}/invocations
-                httpMethod: POST
+                httpMethod: ANY
                 type: aws_proxy
-
+          /:
+            x-amazon-apigateway-any-method:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLamdaSpringFunction.Arn}/invocations
+                httpMethod: ANY
+                type: aws_proxy
   AwsLamdaSpringFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -41,6 +47,12 @@ Resources:
           Properties:
             RestApiId: !Ref AwsLamdaSpringApi
             Path: /{proxy+}
+            Method: ANY
+        RootApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref AwsLamdaSpringApi
+            Path: /
             Method: ANY
 
 Outputs:

@@ -23,6 +23,12 @@ You can use the SAM CLI to quickly build the project
 sam build
 ```
 
+OR
+
+```bash
+samlocal build
+```
+
 ## Testing locally with the SAM CLI
 
 From the project root folder - where the `template.yml` file is located - start the API with the SAM CLI.
@@ -61,7 +67,7 @@ Setup Remote Debug In your IDE and attached port ``5005`` and host ``localhost``
 
 Set Breakpoint and Hit ``http://127.0.0.1:3000/ping``
 
-Test Using event 
+Test Using event
 
 ```bash
 sam local invoke --event events/event.json
