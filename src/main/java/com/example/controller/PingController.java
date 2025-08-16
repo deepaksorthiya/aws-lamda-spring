@@ -24,6 +24,16 @@ public class PingController {
         return pong;
     }
 
+    @RequestMapping(path = "/foo/{gender}/bar/{age}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String complexRequest(@RequestBody String body,
+                                 @PathVariable("gender") String gender,
+                                 @PathVariable("age") String age,
+                                 @RequestParam("name") String name
+    ) {
+        System.out.println("Body: " + body + " - " + gender + "/" + age + "/" + name);
+        return gender + "/" + age + "/" + name;
+    }
+
     @GetMapping(value = {"/server-info"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> getRequestInfo(@RequestHeader LinkedHashMap<String, String> httpHeaders, HttpServletRequest httpServletRequest) {
         httpHeaders.put("remoteHost", httpServletRequest.getRemoteHost());

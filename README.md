@@ -51,6 +51,14 @@ $ curl -s http://127.0.0.1:3000/ping | jq
 }
 ``` 
 
+```bash
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST http://localhost:3000/foo/male/bar/25?name=Ricky
+```
+
+```bash
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST http://eh1sooyylm.execute-api.localhost.localstack.cloud:4566/dev/foo/male/bar/25?name=Ricky
+```
+
 ## Debug Locally
 
 ```bash
