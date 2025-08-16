@@ -1,6 +1,6 @@
-# aws-lamda-spring serverless API
+# aws-lambda-spring serverless API
 
-The aws-lamda-spring project, created with [
+The aws-lambda-spring project, created with [
 `aws-serverless-java-container`](https://github.com/aws/serverless-java-container).
 
 The starter project defines a simple `/ping` resource that can accept `GET` requests with its tests.
@@ -102,7 +102,7 @@ can use `curl` or a web browser to make a call to the URL
 -------------------------------------------------------------------------------------------------------------
 OutputKey-Description                        OutputValue
 -------------------------------------------------------------------------------------------------------------
-AwsLamdaSpringApi - URL for application            https://xxxxxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/pets
+AwsLambdaSpringApi - URL for application            https://xxxxxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/pets
 -------------------------------------------------------------------------------------------------------------
 ```
 

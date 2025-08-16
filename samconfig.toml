@@ -1,9 +1,9 @@
 version = 0.1
 
 [default.deploy.parameters]
-stack_name = "aws-lamda-spring"
+stack_name = "aws-lambda-spring"
 resolve_s3 = true
-s3_prefix = "aws-lamda-spring"
+s3_prefix = "aws-lambda-spring"
 region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true

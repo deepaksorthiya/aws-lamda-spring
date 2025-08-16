@@ -1,38 +1,38 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS Serverless Spring Boot 2 API - com.example::aws-lamda-spring
+Description: AWS Serverless Spring Boot 3 API - com.example::aws-lambda-spring
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
 
 Resources:
-  AwsLamdaSpringApi:
+  AwsLambdaSpringApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: dev
       EndpointConfiguration: REGIONAL
-      Name: AwsLamdaSpringApi
+      Name: AwsLambdaSpringApi
       DefinitionBody:
         swagger: "2.0"
         info:
-          title: "AwsLamdaSpringApi"
+          title: "AwsLambdaSpringApi"
           version: "1.0"
         paths:
           /{proxy+}:
             x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLamdaSpringFunction.Arn}/invocations
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLambdaSpringFunction.Arn}/invocations
                 httpMethod: ANY
                 type: aws_proxy
           /:
             x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLamdaSpringFunction.Arn}/invocations
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AwsLambdaSpringFunction.Arn}/invocations
                 httpMethod: ANY
                 type: aws_proxy
-  AwsLamdaSpringFunction:
+  AwsLambdaSpringFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: com.example.StreamLambdaHandler::handleRequest
@@ -47,19 +47,19 @@ Resources:
         ProxyApi:
           Type: Api
           Properties:
-            RestApiId: !Ref AwsLamdaSpringApi
+            RestApiId: !Ref AwsLambdaSpringApi
             Path: /{proxy+}
             Method: ANY
         RootApi:
           Type: Api
           Properties:
-            RestApiId: !Ref AwsLamdaSpringApi
+            RestApiId: !Ref AwsLambdaSpringApi
             Path: /
             Method: ANY
 
 Outputs:
   ApiUrl:
     Description: "Invoke URL for API Gateway endpoint"
-    Value: !Sub "http://${AwsLamdaSpringApi}.execute-api.${AWS::Region}.localhost.localstack.cloud/dev/"
+    Value: !Sub "http://${AwsLambdaSpringApi}.execute-api.${AWS::Region}.localhost.localstack.cloud/dev/"
     Export:
-      Name: AwsLamdaSpringApiUrl
+      Name: AwsLambdaSpringApiUrl
