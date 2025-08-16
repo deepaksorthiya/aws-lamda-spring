@@ -41,6 +41,8 @@ Resources:
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30
+      SnapStart:
+        ApplyOn: PublishedVersions
       Events:
         ProxyApi:
           Type: Api
