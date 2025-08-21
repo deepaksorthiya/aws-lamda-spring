@@ -2,8 +2,12 @@ package com.example.controller;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,6 +21,9 @@ import java.util.Map;
 
 @RestController
 public class PingController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PingController.class);
+
     @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public Map<String, String> ping() {
         Map<String, String> pong = new HashMap<>();
@@ -50,5 +57,10 @@ public class PingController {
             throw new RuntimeException(e);
         }
         return httpHeaders;
+    }
+
+    @GetMapping("/exception")
+    public void exception() {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.getReasonPhrase());
     }
 }
