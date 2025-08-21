@@ -35,12 +35,17 @@ Resources:
   AwsLambdaSpringFunction:
     Type: AWS::Serverless::Function
     Properties:
+      # uncomment and add env MAIN_CLASS if you want to use below handler
+      #Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler::handleRequest
       Handler: com.example.StreamLambdaHandler::handleRequest
       Runtime: java21
       CodeUri: .
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30
+      Environment:
+        Variables:
+          MAIN_CLASS: com.example.Application
       SnapStart:
         ApplyOn: PublishedVersions
       Events:
