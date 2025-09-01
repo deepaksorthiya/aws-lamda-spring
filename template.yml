@@ -39,7 +39,10 @@ Resources:
       #Handler: com.amazonaws.serverless.proxy.spring.SpringDelegatingLambdaContainerHandler::handleRequest
       Handler: com.example.StreamLambdaHandler::handleRequest
       Runtime: java21
-      CodeUri: .
+      # ref jar/zip for local testing without run sam build command. make you sure you have build file generated using mvn clean package
+      CodeUri: ./target/aws-lambda-spring-1.0.0-SNAPSHOT-lambda-package.zip
+      # for source code mapping
+      #CodeUri: .
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30

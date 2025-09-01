@@ -29,16 +29,20 @@ OR
 samlocal build
 ```
 
+OR
+
+```bash
+mvn clean package
+```
+
+for local testing you can reference jar/zip file in [template.yml](template.yml).
+
 ## Testing locally with the SAM CLI
 
 From the project root folder - where the `template.yml` file is located - start the API with the SAM CLI.
 
 ```bash
-$ sam local start-api
-
-...
-Mounting com.amazonaws.serverless.archetypes.StreamLambdaHandler::handleRequest (java21) at http://127.0.0.1:3000/{proxy+} [OPTIONS GET HEAD POST PUT DELETE PATCH]
-...
+samlocal local start-api --warm-containers EAGER
 ```
 
 Using a new shell, you can send a test ping request to your API:
@@ -63,10 +67,15 @@ curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json"
 
 ```bash
 # Invoke a function locally in debug mode on port 5005
-sam local invoke -d 5005 <function logical id>
+samlocal local invoke -d 5005 <function logical id>
+```
+
 OR
-# Start local API Gateway in debug mode on port 5005
-sam local start-api -d 5005
+
+Start local API Gateway in debug mode on port 5005
+
+```bash
+samlocal local start-api -d 5005 --warm-containers EAGER
 ```
 
 Fire first request ``http://127.0.0.1:3000/`` to up docker container.
@@ -78,11 +87,11 @@ Set Breakpoint and Hit ``http://127.0.0.1:3000/ping``
 Test Using event
 
 ```bash
-sam local invoke --event events/event.json
+samlocal local invoke --event events/event.json
 ```
 
 ```bash
-sam local invoke --event events/event.json -d 5005
+samlocal local invoke --event events/event.json -d 5005
 ```
 
 ## Deploying to AWS
